@@ -1,0 +1,28 @@
+<h1>Companies</h1>
+<hr>
+
+<%= flash_messages %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Website</th>
+    <th>Logo</th>
+    <th></th>
+  </tr>
+  
+<% for company in @companies %>
+  <tr>
+    <td><%=h company.name %></td>
+    <td><%=h company.phone %></td>
+    <td><%=h company.website %></td>
+    <td><%= image_tag company.avatar.thumbnails.first.public_filename if company.avatar %></td>
+    <td><%= link_to "#{image_tag('pencil.png')}Edit", edit_company_path(company), :class => 'button' %></td>
+  </tr>
+<% end %>
+</table>
+
+<hr />
+
+<%= link_to "#{image_tag('add.png')}New Company", new_company_path, :class => 'button positive' %>

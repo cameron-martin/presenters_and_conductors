@@ -1,0 +1,53 @@
+<h1>New Company</h1>
+<hr />
+
+<% if @company_conductor.errors.any? %>
+<div class="column span-9 first last">
+  <%= error_messages_for :company_conductor, :header_tag => 'h3' %>
+</div>
+<hr>
+<% end %>
+
+<% form_for(:company_conductor, :url => companies_path, :html => { :multipart => true }) do |f| %>
+  <div class="column span-5 first">
+    <p><label>Name:</label><br />
+    <%= f.text_field :name %></p>
+
+    <p><label> Phone:</label><br />
+    <%= f.text_field :phone %></p>
+
+    <p><label> Website:</label><br />
+    <%= f.text_field :website %></p>
+    
+    <p><label>Upload a logo:</label><br />
+    <%= f.file_field :uploaded_data %></p>
+  </div>
+  
+  <div class="column span-5 last">
+    <p><label>Card Holder's Name:</label><br>
+    <%= f.text_field :owner_name %></p>
+    
+    <p><label>Card Type:</label><br>
+    <%= f.select :provider, CreditCard.supported_providers, {:include_blank => true}, {:id => 'card_provider'} %></p>
+    
+    <p><label>Card Number:</label><br>
+    <%= f.text_field :number %></p>
+    
+    <p><label>Expiry Date:</label><br>
+    <%= f.select(:expiry_month, %w(01 02 03 04 05 06 07 08 09 10 11 12)) %> 
+    / 
+    <%= f.select(:expiry_year, %w(2007 2008 2009 2010 2011 2012 2013 2014 2015)) %>
+  </div>
+  <hr />
+  <div class="column span-5 first">
+    <button type="submit" class="button positive">
+      <%= image_tag 'tick.png' %> 
+      Create
+    </button>
+
+    <a href="<%= companies_path %>" class="button negative">
+      <%= image_tag 'cross.png' %> 
+      Cancel
+    </a>
+  </div>
+<% end %>
